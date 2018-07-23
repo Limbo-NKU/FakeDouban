@@ -2,19 +2,24 @@ package cn.edu.nku.cc.FakeDouban.domain.po;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 class User implements Serializable{
-    private int id;
+	//普通用户基本属性
+    private Integer id;
     private String userName;
     private String password;
     private String gender;
-    private int age;
+    private Integer age;
     private String city;
-    private int jobId;
-    private String description;
-	public int getId() {
+    private Integer jobId;
+	private String description;
+	//level为评论员必需属性，普通用户为空
+	//前端解析时若为空，则隐藏等级显示
+	private Integer level;
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUserName() {
@@ -35,10 +40,10 @@ class User implements Serializable{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	public String getCity() {
@@ -47,10 +52,10 @@ class User implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public int getJobId() {
+	public Integer getJobId() {
 		return jobId;
 	}
-	public void setJobId(int jobId) {
+	public void setJobId(Integer jobId) {
 		this.jobId = jobId;
 	}
 	public String getDescription() {
@@ -63,15 +68,11 @@ class User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(String userName, String password, String gender, int age, String city, int jobId, String description) {
-		super();
-		this.userName = userName;
-		this.password = password;
-		this.gender = gender;
-		this.age = age;
-		this.city = city;
-		this.jobId = jobId;
-		this.description = description;
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
     
 }
