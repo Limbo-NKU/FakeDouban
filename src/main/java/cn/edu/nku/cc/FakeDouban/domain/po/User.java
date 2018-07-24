@@ -3,7 +3,7 @@ package cn.edu.nku.cc.FakeDouban.domain.po;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-class User implements Serializable{
+public class User implements Serializable{
 	//普通用户基本属性
     private Integer id;
     private String userName;
@@ -11,7 +11,7 @@ class User implements Serializable{
     private String gender;
     private Integer age;
     private String city;
-    private Integer jobId;
+    private Job job;
 	private String description;
 	//level为评论员必需属性，普通用户为空
 	//前端解析时若为空，则隐藏等级显示
@@ -52,11 +52,11 @@ class User implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Integer getJobId() {
-		return jobId;
+	public Job getJob() {
+		return job;
 	}
-	public void setJobId(Integer jobId) {
-		this.jobId = jobId;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 	public String getDescription() {
 		return description;
