@@ -3,6 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-  		<typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.User" alias="User"/>
+	<!-- 
+	<typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.User" alias="User"/>
+		  <typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.Movie" alias="Movie"/>
+		  <typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.SimpleReview" alias="SimpleReview"/>
+		  <typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.LongReview" alias="LongReview"/>
+		  <typeAlias type="cc.edu.nku.cc.FakeDouban.domain.po.Job" alias="Job"/>
+	 -->
+  		<package name="cn.edu.nku.cc.FakeDouban.domain.po"/>
 	</typeAliases>
 </configuration>

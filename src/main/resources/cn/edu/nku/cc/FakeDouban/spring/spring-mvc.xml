@@ -11,7 +11,8 @@
 			http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 	
-   <mvc:annotation-driven /> 
+   <mvc:annotation-driven />
+   <mvc:default-servlet-handler/>
 
    <context:component-scan base-package="cn.edu.nku.cc.FakeDouban.controller"/>  
 

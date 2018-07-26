@@ -44,7 +44,7 @@
 		<property name="mapperLocations"
 			value="classpath:cn/edu/nku/cc/FakeDouban/mapper/*.xml" />
 		<property name="configLocation"
-			value="classpath:cn/edu/nku/cc/FakeDouban/myBatis/mybatis-config.xml" />
+			value="classpath:cn/edu/nku/cc/FakeDouban/mybatis/mybatis-config.xml" />
 	</bean>
 
 	<context:component-scan	base-package="cn.edu.nku.cc.FakeDouban.biz" />
