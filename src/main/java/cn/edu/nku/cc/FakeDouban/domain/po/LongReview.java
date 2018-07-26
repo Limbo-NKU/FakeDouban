@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class LongReview implements Serializable{
+	private Integer id;
     private User reviewer;
     private Movie movie;
     private int rank;
     private String title;
-    private String content;
+	private String content;
+	private Integer likeCount;
 	public User getReviewer() {
 		return reviewer;
 	}
@@ -42,5 +44,25 @@ public class LongReview implements Serializable{
 	public LongReview() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(Integer likeCount) {
+		this.likeCount = likeCount;
+	}
+	public LongReview(User reviewer, Movie movie, int rank, String title, String content) {
+		super();
+		this.reviewer = reviewer;
+		this.movie = movie;
+		this.rank = rank;
+		this.title = title;
+		this.content = content;
 	}
 }

@@ -5,10 +5,12 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class SimpleReview implements Serializable{
+	private Integer id;
     private User user;
     private Movie movie;
     private int rank;
-    private String review;
+	private String review;
+	private Integer likeCount;
 	public User getUser() {
 		return user;
 	}
@@ -36,6 +38,25 @@ public class SimpleReview implements Serializable{
 	public SimpleReview() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(Integer likeCount) {
+		this.likeCount = likeCount;
+	}
+	public SimpleReview(User user, Movie movie, int rank, String review) {
+		super();
+		this.user = user;
+		this.movie = movie;
+		this.rank = rank;
+		this.review = review;
 	}
     
 }

@@ -11,7 +11,7 @@ public class User implements Serializable{
     private String gender;
     private Integer age;
     private String city;
-    private Job job;
+    private String job;
 	private String description;
 	//level为评论员必需属性，普通用户为空
 	//前端解析时若为空，则隐藏等级显示
@@ -52,10 +52,10 @@ public class User implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Job getJob() {
+	public String getJob() {
 		return job;
 	}
-	public void setJob(Job job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
 	public String getDescription() {
@@ -73,6 +73,17 @@ public class User implements Serializable{
 	}
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+	public User(String userName, String password, String gender, Integer age, String city, String job,
+			String description) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.gender = gender;
+		this.age = age;
+		this.city = city;
+		this.job = job;
+		this.description = description;
 	}
     
 }

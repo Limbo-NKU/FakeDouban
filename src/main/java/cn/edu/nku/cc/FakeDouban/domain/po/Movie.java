@@ -14,12 +14,14 @@ public class Movie implements Serializable{
     private String movieRegion;
     private List<String> movieTags;
     private BigDecimal moviePrice;
-    //首页推荐电影必需特性，普通电影为空
     private BigDecimal ranking;
-    //首页热门推荐电影必需特性，普通电影为空
-    private Integer rankCount;
-    //首页最新推荐电影必需特性，普通电影为空
-    private Date updateTime;
+	private Integer rankCount;
+	private Date updateDate;
+	//首页推荐电影必需属性
+	public String reason;
+	public Integer recommendType;
+
+	//Getters and Setters
 	public Integer getId() {
 		return id;
 	}
@@ -68,15 +70,38 @@ public class Movie implements Serializable{
 	public void setRankCount(Integer rankCount) {
 		this.rankCount = rankCount;
 	}
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+	
 	public Movie() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public Integer getRecommendType() {
+		return recommendType;
+	}
+	public void setRecommendType(Integer recommendType) {
+		this.recommendType = recommendType;
+	}
+	public Movie(String movieName, String movieType, String movieRegion, List<String> movieTags, BigDecimal moviePrice,
+			Date updateDate) {
+		super();
+		this.movieName = movieName;
+		this.movieType = movieType;
+		this.movieRegion = movieRegion;
+		this.movieTags = movieTags;
+		this.moviePrice = moviePrice;
+		this.updateDate = updateDate;
 	}
 
 }
