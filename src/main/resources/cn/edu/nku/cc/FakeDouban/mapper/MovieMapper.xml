@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.nku.cc.FakeDouban.dao.MovieDao">
+	<select id="getTagsByMovieId" parameterType="int" resultType="String">
+		select tagname from tags
+			inner join movieandtags
+			on tags.id=movieandtags.tagid
+			where movieandtags.movieid=#{id}
+	</select>
+	<resultMap id="MovieRecResultMap" type="movie">
+
+		<id property="id" jdbcType="INTEGER" />
+
+		<result property="movieName" jdbcType="VARCHAR" column="movie.moviename"/>
+        <result property="movieType" jdbcType="VARCHAR" column="movie.movietype"/>
+        <result property="movieRegion" jdbcType="VARCHAR" column="movie.movieregion"/>
+        <result property="moviePrice" jdbcType="DECIMAL" column="movie.movieprice"/>
+        <result property="ranking" jdbcType="DECIMAL" column="movie.ranking"/>
+		<result property="rankCount" jdbcType="INTEGER" column="movie.rankcount"/>
+		<result property="updateYear" jdbcType="DATE" column="movie.updateyear"/>
+		<result property="reason" jdbcType="VARCHAR" column="rec_movie.reason"/>
+		<result property="recommendType" jdbcType="INTEGER" column="rec_movie.rec_type"/>
+		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
+
+	</resultMap>
+	<resultMap id="MovieResultMap" type="movie" automapping="true">
+		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
+	</resultMap>
+	<select id="findHotMovies" resultMap="MovieRecResultMap">
+		select * from movie
+			inner join rec_movie
+			on movie.id=rec_movie.id
+			where rec_movie.rec_type = 1
+			<!-- 1代表热门电影-->
+	</select>
+	<select id="findNewMovies" resultMap="MovieRecResultMap">
+		select * from movie 
+			inner join rec_movie
+			on movie.id=rec_movie.id
+			where rec_movie.rec_type = 2
+			<!--2代表新上映电影-->
+	</select>
+	<select id="findAll" resultMap="MovieResultMap">
+		select * from Movie
+	</select>
+</mapper>
