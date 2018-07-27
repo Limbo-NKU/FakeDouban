@@ -27,15 +27,22 @@ public class UserBizImpl implements UserBiz{
 	public User modifyUser(User user) {
         if(userDao.modifyUser(user)>0){
             return userDao.findById(user.getId());
+        }else {
+            return null;
+
         }
-        return null;
 	}
 
 	public User insertUser(User user) {
-        if(userDao.insertUser(user)>0){
-            return userDao.findByNameAndPwd(user);
-        }
-		return null;
+		if (userDao.findByName(user.getUserName()) == null) {
+			if (userDao.insertUser(user) > 0) {
+				return userDao.findByNameAndPwd(user);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 
 }

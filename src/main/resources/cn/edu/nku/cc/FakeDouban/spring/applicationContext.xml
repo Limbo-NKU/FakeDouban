@@ -36,7 +36,7 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.limbo.MarketManage.dao" />
+		<property name="basePackage" value="cn.edu.nku.cc.FakeDouban.dao" />
 	</bean>
 
 	<bean id="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">

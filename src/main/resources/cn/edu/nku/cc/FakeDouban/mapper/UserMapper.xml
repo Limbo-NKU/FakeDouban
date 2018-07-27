@@ -5,19 +5,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.nku.cc.FakeDouban.dao.UserDao">
-	<resultMap id="UserResultMap" type="User">
+	<resultMap id="UserResultMap" type="user">
 
-		<id property="id" jdbcType="INTEGER" column="user.id"/>
+		<id property="id" jdbcType="INTEGER" column="userid"/>
 
-		<result property="userName" jdbcType="VARCHAR" column="user.username" />
-		<result property="password" jdbcType="VARCHAR" column="user.password" />
-		<result property="gender" jdbcType="VARCHAR" column="user.gender" />
-		<result property="age" jdbcType="INTEGER" column="user.age" />
-		<result property="city" jdbcType="VARCHAR" column="user.city" />
+		<result property="userName" jdbcType="VARCHAR" column="username" />
+		<result property="password" jdbcType="VARCHAR" column="password" />
+		<result property="gender" jdbcType="VARCHAR" column="gender" />
+		<result property="age" jdbcType="INTEGER" column="age" />
+		<result property="city" jdbcType="VARCHAR" column="city" />
 		<!-- <result property="job" jdbcType="VARCHAR" column="job.jobname" /> -->
-        <result property="discription" jdbcType="LONGVARCHAR" column="user.discription"  />
-        <result property="level" jdbcType="INTEGER" column="reviewer.level"/>
-		<result property="job" jdbcType="VARCHAR" column="user.job"/>
+        <result property="description" jdbcType="LONGVARCHAR" column="description"  />
+        <result property="level" jdbcType="INTEGER" column="level"/>
+		<result property="job" jdbcType="VARCHAR" column="job"/>
 	</resultMap>
 	
 	<select id="findByNameAndPwd" parameterType="user" resultMap="UserResultMap">
@@ -28,21 +28,43 @@
             and user.password=#{password}
     </select>
     <select id="findById" parameterType="int" resultMap="UserResultMap">
-        select * from user
+        <!-- SELECT
+			`user`.userid as `id`,
+			`user`.username as userName,
+			`user`.`password` as `password`,
+			`user`.age as age,
+			`user`.city as city,
+			`user`.gender as gender,
+			`user`.job as job,
+			`user`.description as description,
+			reviewer.`level` as `level`
+		from `user`
             left join reviewer
             on reviewer.userid=`user`.userid
-            where user.userid=#{id}
+            where `user`.userid=#{id} -->
+        select * 
+            from `user`
+            left join reviewer
+            on reviewer.userid=`user`.userid
+            where `user`.userid=#{id}
+    </select>
+    <select id="findByName" parameterType="String" resultMap="UserResultMap">
+        select * 
+            from `user`
+            left join reviewer
+            on reviewer.userid=`user`.userid
+            where `user`.username=#{userName}
     </select>
     <insert id="insertUser" parameterType="user"
     useGeneratedKeys="true" keyProperty="userid">
         insert into user (username,password,gender,age,city,description,job)
             values (
-            null,#{userName},#{password},#{gender},#{age},#{city},#{description},#{job}
+            #{userName},#{password},#{gender},#{age},#{city},#{description},#{job}
             )
     </insert>
     <update id="modifyUser" parameterType="user">
         update user
-            set userName=#{userName},
+            set username=#{userName},
                 password=#{password},
                 gender=#{gender},
                 age=#{age},
