@@ -18,21 +18,31 @@ public class UserBizImpl implements UserBiz{
 	}
 
 	public User findByNameAndPwd(String userName, String password) {
-		return userDao.findByNameAndPwd(userName, password);
+        User user=new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        return userDao.findByNameAndPwd(user);
 	}
 
 	public User modifyUser(User user) {
         if(userDao.modifyUser(user)>0){
             return userDao.findById(user.getId());
+        }else {
+            return null;
+
         }
-        return null;
 	}
 
 	public User insertUser(User user) {
-        if(userDao.insertUser(user)>0){
-            return userDao.findByNameAndPwd(user.getUserName(), user.getPassword());
-        }
-		return null;
+		if (userDao.findByName(user.getUserName()) == null) {
+			if (userDao.insertUser(user) > 0) {
+				return userDao.findByNameAndPwd(user);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -8,12 +8,12 @@
 	<select id="getTagsByMovieId" parameterType="int" resultType="String">
 		select tagname from tags
 			inner join movieandtags
-			on tags.id=movieandtags.tagid
+			on tags.tagid=movieandtags.tagid
 			where movieandtags.movieid=#{id}
 	</select>
 	<resultMap id="MovieRecResultMap" type="movie">
 
-		<id property="id" jdbcType="INTEGER" />
+		<id property="id" jdbcType="INTEGER" column="movieid" />
 
 		<result property="movieName" jdbcType="VARCHAR" column="movie.moviename"/>
         <result property="movieType" jdbcType="VARCHAR" column="movie.movietype"/>
@@ -22,18 +22,28 @@
         <result property="ranking" jdbcType="DECIMAL" column="movie.ranking"/>
 		<result property="rankCount" jdbcType="INTEGER" column="movie.rankcount"/>
 		<result property="updateYear" jdbcType="DATE" column="movie.updateyear"/>
-		<result property="reason" jdbcType="VARCHAR" column="rec_movie.reason"/>
-		<result property="recommendType" jdbcType="INTEGER" column="rec_movie.rec_type"/>
+		<result property="reason" jdbcType="VARCHAR" column="recommendmovie.reason"/>
+		<result property="recommendType" jdbcType="INTEGER" column="recommendmovie.recommendtype"/>
 		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
 
 	</resultMap>
-	<resultMap id="MovieResultMap" type="movie" automapping="true">
+	<resultMap id="MovieResultMap" type="movie">
+	<id property="id" jdbcType="INTEGER" column="movieid" />
+
+		<result property="movieName" jdbcType="VARCHAR" column="moviename"/>
+        <result property="movieType" jdbcType="VARCHAR" column="movietype"/>
+        <result property="movieRegion" jdbcType="VARCHAR" column="movieregion"/>
+        <result property="moviePrice" jdbcType="DECIMAL" column="movieprice"/>
+        <result property="ranking" jdbcType="DECIMAL" column="ranking"/>
+		<result property="rankCount" jdbcType="INTEGER" column="rankcount"/>
+		<result property="updateYear" jdbcType="DATE" column="updateyear"/>
+		
 		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
 	</resultMap>
 	<select id="findHotMovies" resultMap="MovieRecResultMap">
 		select * from movie
 			inner join rec_movie
-			on movie.id=rec_movie.id
+			on movie.movieid=rec_movie.id
 			where rec_movie.rec_type = 1
 			<!-- 1代表热门电影-->
 	</select>
@@ -46,5 +56,11 @@
 	</select>
 	<select id="findAll" resultMap="MovieResultMap">
 		select * from Movie
+	</select>
+	<select id="findById" parameterType="int" resultMap="MovieResultMap">
+		select * from movie where movieid=#{id}
+	</select>
+	<select id="findByName" parameterType="String" resultMap="MovieResultMap">
+		select * from movie where moviename like #{movieName}
 	</select>
 </mapper>

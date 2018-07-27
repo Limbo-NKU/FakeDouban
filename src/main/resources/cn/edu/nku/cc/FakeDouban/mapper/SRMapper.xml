@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.nku.cc.FakeDouban.dao.SimpleReviewDao">
+	
+    <resultMap id="LRResultMap" type="simpleReview">
+        <id property="id" jdbcType="INTEGER" column="lrid"/>
+        <result property="rank" jdbcType="INTEGER" column="rank"/>
+        <result property="review" jdbcType="VARCHAR" column="review"/>
+        <result property="likeCount" jdbcType="INTEGER" column="likecount"/>
+        <association property="user" javaType="user">
+            <id property="id" jdbcType="INTEGER" column="userid"/>
+        </association>
+        <association property="movie" javaType="movie">
+            <id property="id" jdbcType="INTEGER" column="movieid"/>
+        </association>
+    </resultMap>
+
+    <select id="findSRByMovieId" parameterType="int" resultType="simpleReview">
+        select * from SimpleReview
+            where movieid=#{movieId}
+    </select>
+    <select id="findByReviewerAndMovie" parameterType="simpleReview" resultType="simpleReview">
+        select * from SimpleReview
+            where userid=#{user.id}
+                and movieid = #{movie.id}
+    </select>
+    <insert id="insert" parameterType="simpleReview" useGeneratedKeys="true" keyProperty="lrid">
+        insert into simpleReview(userid,movieid,rank,review,likecount)
+        values(
+        #{user.id},#{movie.id}，#{rank},#{review},0
+        )
+    </insert>
+</mapper>
