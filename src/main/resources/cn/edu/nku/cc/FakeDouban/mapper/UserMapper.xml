@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.nku.cc.FakeDouban.dao.UserDao">
+	<resultMap id="UserResultMap" type="User">
+
+		<id property="id" jdbcType="INTEGER" column="user.id"/>
+
+		<result property="userName" jdbcType="VARCHAR" column="user.username" />
+		<result property="password" jdbcType="VARCHAR" column="user.password" />
+		<result property="gender" jdbcType="VARCHAR" column="user.gender" />
+		<result property="age" jdbcType="INTEGER" column="user.age" />
+		<result property="city" jdbcType="VARCHAR" column="user.city" />
+		<!-- <result property="job" jdbcType="VARCHAR" column="job.jobname" /> -->
+        <result property="discription" jdbcType="LONGVARCHAR" column="user.discription"  />
+        <result property="level" jdbcType="INTEGER" column="reviewer.level"/>
+		<result property="job" jdbcType="VARCHAR" column="user.job"/>
+	</resultMap>
+	
+	<select id="findByNameAndPwd" parameterType="user" resultMap="UserResultMap">
+        select * from user
+            left join reviewer
+            on reviewer.userid=user.userid
+            where user.username=#{userName}
+            and user.password=#{password}
+    </select>
+    <select id="findById" parameterType="int" resultMap="UserResultMap">
+        select * from user
+            left join reviewer
+            on reviewer.userid=`user`.userid
+            where user.userid=#{id}
+    </select>
+    <insert id="insertUser" parameterType="user"
+    useGeneratedKeys="true" keyProperty="userid">
+        insert into user (username,password,gender,age,city,description,job)
+            values (
+            null,#{userName},#{password},#{gender},#{age},#{city},#{description},#{job}
+            )
+    </insert>
+    <update id="modifyUser" parameterType="user">
+        update user
+            set userName=#{userName},
+                password=#{password},
+                gender=#{gender},
+                age=#{age},
+                city=#{city},
+                description=#{description},
+                job=#{job}
+            where userid=#{id}
+    </update>
+</mapper>

@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.nku.cc.FakeDouban.biz.LoginBiz;
+import cn.edu.nku.cc.FakeDouban.biz.UserBiz;
 import cn.edu.nku.cc.FakeDouban.domain.po.User;
 
 @Controller
 @RequestMapping("")
 public class LoginController{
     @Autowired
-    private LoginBiz loginBiz;
+    private UserBiz userBiz;
 
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
         String userName=request.getParameter("username");
         String password=request.getParameter("password");
-        User user=loginBiz.login(userName,password);
+        User user=userBiz.findByNameAndPwd(userName,password);
         if(user!=null){
             HttpSession session=request.getSession();
             session.setAttribute("userSession", user);

@@ -18,7 +18,10 @@ public class UserBizImpl implements UserBiz{
 	}
 
 	public User findByNameAndPwd(String userName, String password) {
-		return userDao.findByNameAndPwd(userName, password);
+        User user=new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        return userDao.findByNameAndPwd(user);
 	}
 
 	public User modifyUser(User user) {
@@ -30,7 +33,7 @@ public class UserBizImpl implements UserBiz{
 
 	public User insertUser(User user) {
         if(userDao.insertUser(user)>0){
-            return userDao.findByNameAndPwd(user.getUserName(), user.getPassword());
+            return userDao.findByNameAndPwd(user);
         }
 		return null;
 	}

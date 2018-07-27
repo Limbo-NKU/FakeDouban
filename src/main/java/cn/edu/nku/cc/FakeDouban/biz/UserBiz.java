@@ -6,4 +6,5 @@ public interface UserBiz{
     public User findById(Integer id);
     public User modifyUser(User user);
     public User insertUser(User user);
+	public User findByNameAndPwd(String userName, String password);
 }
