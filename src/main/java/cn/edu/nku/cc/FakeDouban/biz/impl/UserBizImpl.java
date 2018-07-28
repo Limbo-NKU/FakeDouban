@@ -17,6 +17,10 @@ public class UserBizImpl implements UserBiz{
 		return userDao.findById(id);
 	}
 
+	public User findByName(String userName){
+		return userDao.findByName(userName);
+	}
+
 	public User findByNameAndPwd(String userName, String password) {
         User user=new User();
         user.setUserName(userName);
