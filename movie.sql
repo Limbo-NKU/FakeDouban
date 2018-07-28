@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-07-27 16:57:34
+Date: 2018-07-28 10:46:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -129,6 +129,22 @@ CREATE TABLE `movieandtags` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for recommendmovie
+-- ----------------------------
+DROP TABLE IF EXISTS `recommendmovie`;
+CREATE TABLE `recommendmovie` (
+  `movieid` int(11) NOT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `recommendtype` int(11) DEFAULT NULL,
+  PRIMARY KEY (`movieid`),
+  CONSTRAINT `recommendmovie_ibfk_1` FOREIGN KEY (`movieid`) REFERENCES `movie` (`movieid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of recommendmovie
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for reviewer
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewer`;
@@ -212,7 +228,7 @@ CREATE TABLE `user` (
   `description` text,
   PRIMARY KEY (`userid`),
   KEY `AK_Key_2` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
