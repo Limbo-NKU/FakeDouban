@@ -6,10 +6,10 @@
 
 <mapper namespace="cn.edu.nku.cc.FakeDouban.dao.MovieDao">
 	<select id="getTagsByMovieId" parameterType="int" resultType="String">
-		select tagname from tags
+		select tags.tagname from tags
 			inner join movieandtags
 			on tags.tagid=movieandtags.tagid
-			where movieandtags.movieid=#{id}
+			where movieandtags.movieid=#{movieid}
 	</select>
 	<resultMap id="MovieRecResultMap" type="movie">
 
@@ -24,7 +24,7 @@
 		<result property="updateYear" jdbcType="DATE" column="movie.updateyear"/>
 		<result property="reason" jdbcType="VARCHAR" column="recommendmovie.reason"/>
 		<result property="recommendType" jdbcType="INTEGER" column="recommendmovie.recommendtype"/>
-		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
+		<collection property="movieTags" column="movieid" ofType="String" select="getTagsByMovieId"/>
 
 	</resultMap>
 	<resultMap id="MovieResultMap" type="movie">
@@ -38,7 +38,7 @@
 		<result property="rankCount" jdbcType="INTEGER" column="rankcount"/>
 		<result property="updateYear" jdbcType="DATE" column="updateyear"/>
 		
-		<collection property="movieTags" column="id" ofType="String" select="getTagsByMovieId"/>
+		<collection property="movieTags" column="movieid" ofType="String" select="getTagsByMovieId"/>
 	</resultMap>
 	<select id="findHotMovies" resultMap="MovieRecResultMap">
 		select * from movie

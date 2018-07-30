@@ -59,9 +59,9 @@ public class MovieController{
         return mView;
     }
 
-    @RequestMapping("/movieDetail")
+    @RequestMapping("/detail")
     public ModelAndView getMovieDetail(HttpServletRequest request){
-        Integer movieId=Integer.parseInt(request.getParameter("movieId"));
+        Integer movieId=Integer.parseInt(request.getParameter("movieid"));
         Movie movie=movieBiz.findById(movieId);
         List<SimpleReview> simpleReviews=movieBiz.findSRByMovieId(movieId);
         List<LongReview> longReviews=movieBiz.findLRByMovieId(movieId);
@@ -71,7 +71,7 @@ public class MovieController{
         resultMap.put("longreviews", longReviews);
         ModelAndView mView= new ModelAndView();
         mView.addAllObjects(resultMap);
-        mView.setViewName("moviedetail");
+        mView.setViewName("single");
         return mView;
 
     }
@@ -106,15 +106,15 @@ public class MovieController{
         }
     }
 
-    @RequestMapping("/viewSimpleReviews")
-    public ModelAndView getSimpleReviews(HttpServletRequest request){
-        Integer movieId=Integer.parseInt(request.getParameter("movieId"));
-        List<SimpleReview> simpleReviews=movieBiz.findSRByMovieId(movieId);
-        ModelAndView mView=new ModelAndView();
-        mView.addObject("simpleReviews", simpleReviews);
-        mView.setViewName("srlist");
-        return mView;
-    }
+//    @RequestMapping("/viewSimpleReviews")
+//    public ModelAndView getSimpleReviews(HttpServletRequest request){
+//        Integer movieId=Integer.parseInt(request.getParameter("movieId"));
+//        List<SimpleReview> simpleReviews=movieBiz.findSRByMovieId(movieId);
+//        ModelAndView mView=new ModelAndView();
+//        mView.addObject("simpleReviews", simpleReviews);
+//        mView.setViewName("srlist");
+//        return mView;
+//    }
 
     @RequestMapping("viewLongReviews")
     public ModelAndView getLongReviews(HttpServletRequest request){
