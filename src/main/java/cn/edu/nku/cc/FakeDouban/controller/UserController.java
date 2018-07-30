@@ -2,6 +2,7 @@ package cn.edu.nku.cc.FakeDouban.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +67,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/userDetail/{id}")
+    @RequestMapping("/detail/{id}")
     public ModelAndView getUserDetail(@PathVariable("id") int id, HttpServletRequest request,
             HttpServletResponse response) {
 
@@ -80,6 +81,7 @@ public class UserController {
             }
             return null;
         } else {
+//        	return user;
             ModelAndView mView = new ModelAndView();
             mView.addObject("user", user);
             mView.setViewName("userdetail");
@@ -87,7 +89,8 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/userDetail")
+    @RequestMapping("/detail")
+    
     public ModelAndView getCurrentUserDetail(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
@@ -104,6 +107,7 @@ public class UserController {
             }
             return null;
         } else {
+//        	return user;
             ModelAndView mView = new ModelAndView();
             mView.addObject("user", user);
             mView.setViewName("userdetail");

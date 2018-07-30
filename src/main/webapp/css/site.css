@@ -1,0 +1,22 @@
+#viewall-button{
+	background-color: #FF9800;
+	color: white;
+	text-align: center;
+	height: 70px;
+	width:95%;
+	font-size: xx-large;
+	font-weight:900;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+#viewall-button>h1{
+	vertical-align: middle;
+	line-height: 70px;
+}
+.header{
+	border-bottom: #FF9800 solid 2px;
+}
+.login-list>li{
+	border-color: gray;
+}
