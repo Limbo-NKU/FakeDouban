@@ -143,9 +143,27 @@ public class UserController {
         Map<String,String> resultMap=new HashMap<String,String>();
         User user=userBiz.findByName(username);
         if(user!=null){
-            resultMap.put("userCode","exist");
+            resultMap.put("status","exist");
         }else{
-            resultMap.put("userCode","notexist");
+            resultMap.put("status","notexist");
+        }
+        return resultMap;
+    }
+    
+
+    @RequestMapping(value="/modifypwd",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> modifyPassword(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user=(User) session.getAttribute("user");
+        String password=request.getParameter("password");
+        user.setPassword(password);
+
+        Map<String,String> resultMap=new HashMap<String,String>();
+        if(userBiz.modifyUser(user)!=null){
+            resultMap.put("status", "success");
+        }else{
+            resultMap.put("status", "fail");
         }
         return resultMap;
     }

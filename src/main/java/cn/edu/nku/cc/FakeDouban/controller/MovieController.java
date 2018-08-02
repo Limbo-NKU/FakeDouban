@@ -32,8 +32,8 @@ public class MovieController{
         List<Movie> hotMovies=movieBiz.getHotMovies();
         List<Movie> newMovies=movieBiz.getNewMovies();
         Map<String,Object> resultMap=new HashMap<String,Object>();
-        resultMap.put("hotMovies",hotMovies);
-        resultMap.put("newMovies", newMovies);
+        resultMap.put("hotmovies",hotMovies);
+        resultMap.put("newmovies", newMovies);
         ModelAndView mView = new ModelAndView();
         mView.addAllObjects(resultMap);
         mView.setViewName("index");
@@ -49,9 +49,9 @@ public class MovieController{
         return mView;
     }
 
-    @RequestMapping("/findMovies")
+    @RequestMapping("/findmovies")
     public ModelAndView findMovieByName(HttpServletRequest request){
-        String movieName=request.getParameter("movieName");
+        String movieName=request.getParameter("moviename");
         List<Movie> movies= movieBiz.findByName(movieName);
         ModelAndView mView=new ModelAndView();
         mView.addObject("movies", movies);
@@ -76,7 +76,7 @@ public class MovieController{
 
     }
 
-    @RequestMapping(value="/simpleReview",method=RequestMethod.POST)
+    @RequestMapping(value="/simplereview",method=RequestMethod.POST)
     @ResponseBody
     public SimpleReview postSimpleReview(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -84,11 +84,11 @@ public class MovieController{
         
         Integer movieId=Integer.parseInt(request.getParameter("movieid"));
         Integer rank=Integer.parseInt(request.getParameter("rank"));
-        String description=request.getParameter("description");
-        return movieBiz.setNewSimpleReview(user,movieId,rank,description);
+        String review=request.getParameter("review");
+        return movieBiz.setNewSimpleReview(user,movieId,rank,review);
 
     }
-    @RequestMapping(value="/longReview",method=RequestMethod.POST)
+    @RequestMapping(value="/longreview",method=RequestMethod.POST)
     @ResponseBody
     public LongReview postLongReview(HttpServletRequest request,HttpServletResponse response) throws IOException{
         HttpSession session=request.getSession();
