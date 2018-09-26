@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.edu.nku.cc.FakeDouban.biz.AdminBiz;
 import cn.edu.nku.cc.FakeDouban.biz.MovieBiz;
 import cn.edu.nku.cc.FakeDouban.biz.UserBiz;
 import cn.edu.nku.cc.FakeDouban.biz.impl.UserBizImpl;
+import cn.edu.nku.cc.FakeDouban.domain.po.Administer;
 import cn.edu.nku.cc.FakeDouban.domain.po.Movie;
 import cn.edu.nku.cc.FakeDouban.domain.po.User;
 
@@ -23,10 +25,10 @@ import cn.edu.nku.cc.FakeDouban.domain.po.User;
 public class testBiz {
 	
 	@Autowired 
-	private MovieBiz movieBiz;
+	private AdminBiz adminBiz;
 	@Test
 	public void test(){
-		Movie movie=movieBiz.findById(1);
+		Administer administer=adminBiz.findByNameAndPwd("admin", "admin");
 		System.out.println(" ");
 	}
 

@@ -22,11 +22,11 @@ body a:hover{
 	text-decoration:none;
 }
 input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_register ul li a,.w3ls_footer_grid1_right ul li a,.w3_customer_email_right a,ul.dropdown-menu.multi-column ul li a{
-	transition:.5s ease-in;
-	-webkit-transition:.5s ease-in;
-	-moz-transition:.5s ease-in;
-	-o-transition:.5s ease-in;
-	-ms-transition:.5s ease-in;
+	transition:.3s ease-in;
+	-webkit-transition:.3s ease-in;
+	-moz-transition:.3s ease-in;
+	-o-transition:.3s ease-in;
+	-ms-transition:.3s ease-in;
 }
 /*-- header --*/
 .header {
@@ -62,7 +62,7 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 .w3_search{
 	float: left;
     width: 40%;
-    margin-left: 9em;
+    margin-left: 5em;
 	margin-top: .7em;
 }
 .w3_search input[type="text"]{
@@ -95,7 +95,7 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 .w3l_sign_in_register{
 	float: right;
     margin-top:1em;
-    width: 25%;
+    width: 35%;
 }
 .w3l_sign_in_register ul li a{
 	color: #fff;
@@ -104,7 +104,7 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
     text-decoration: none;
     background: #FF8D1B;
     text-align: center;
-    padding: 6px 30px;
+    padding: 6px 20px;
     font-weight: bold;
 }
 .w3l_sign_in_register ul li a:focus{

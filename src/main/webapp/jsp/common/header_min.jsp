@@ -19,23 +19,24 @@
 			}
 		</script>
 		<!-- //for-mobile-apps -->
-		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<link rel="stylesheet" href="../css/contactstyle.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="../css/faqstyle.css" type="text/css" media="all" />
-		<link href="../css/single.css" rel='stylesheet' type='text/css' />
-		<link href="../css/medile.css" rel='stylesheet' type='text/css' />
+		<link href="/FakeDouban/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/FakeDouban/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" href="/FakeDouban/css/contactstyle.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="/FakeDouban/css/faqstyle.css" type="text/css" media="all" />
+		<link href="/FakeDouban/css/single.css" rel='stylesheet' type='text/css' />
+		<link href="/FakeDouban/css/medile.css" rel='stylesheet' type='text/css' />
 		
 		
 		<!-- font-awesome icons -->
-		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="/FakeDouban/css/font-awesome.min.css" />
 		<!-- //font-awesome icons -->
 		<!-- js -->
-		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<!-- <script type="text/javascript" src="/FakeDouban/js/jquery-2.1.4.min.js"></script>-->
 		<!-- //js -->
-		
+		<script type="text/javascript" src="/FakeDouban/js/jquery-3.3.1.js"></script>		
+		<script type="text/javascript" src="/FakeDouban/js/common.js"></script>
 		<!-- start-smoth-scrolling -->
-		<link rel="stylesheet" type="text/css" href="../css/site.css"/>
+		<link rel="stylesheet" type="text/css" href="/FakeDouban/css/site.css"/>
 	</head>
 
 	<body>
@@ -43,8 +44,8 @@
 		<div class="header" >
 			<div class="container">
 				<div class="w3layouts_logo">
-					<a href="index.html">
-						<h1>One<span>Movies</span></h1></a>
+					<a href="/FakeDouban/movie/index">
+						<h1>Fake<span>Douban</span></h1></a>
 				</div>
 				
 			</div>

@@ -2,13 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@include file="common/header_min.jsp"%>
 <link rel="stylesheet" type="text/css" href="../css/login.css" />
-<script src="../js/register.js" type="text/javascript" charset="utf-8"></script>
+<script src="/FakeDouban/js/register.js" type="text/javascript" charset="utf-8"></script>
 <div class="register-box">
 		<br />
 		<h1 style="font-size: 48;font-weight: 900; text-align: center;">用  户  注  册</h1>
 
 		<ul>
-			<form id="registerForm" action="">
+			<form id="registerForm" action="/FakeDouban/user/register" method="post">
+			<li>
+			<span class="error">
+			${requestScope.error }
+			</span>
+			</li>
 			<li>
 				<label for="username">用户名：</label>
 				<input id="username" type="text" name="username" />
@@ -50,12 +55,12 @@
 			</li>
 			<br />
 			<li>
-				<label for "job">工作种类：</label>
+				<label for="job">工作种类：</label>
 				<select name="job">
 					<option value="保密" selected="selected">保密</option>
-					<option value="无业">无业</option>
+					<option value="待业">待业</option>
 					<option value="学生">学生</option>
-					<option value="稳定工作">稳定工作</option>
+					<option value="稳定工作者">稳定工作者</option>
 				</select>
 			</li>
 			<br />
@@ -64,10 +69,15 @@
 				<input type="text" name="description" />
 			</li>
 			<br />
-					<!--<input type="submit" class="button" value="提交" />-->
-					<button class="button" id="submitbtn">提交</button>
+			</form>
+					<!--<input type="submit" class="button" value="提交" />
+					<button class="button" id="submitbtn" onclick="javascript:form.submit()">提交</button>
 					<button class="button" onclick="javascript:history.go(-1)" >后退</button>
-
+					-->
+					<button class="button" id="submitbtn" onclick="submitForm()">提交</button>
+			
+					<button class="button" onclick="javascript:history.go(-1)" >后退</button>
+					
 			<!--<ul clas="button-list">
 				<li>
 					<input type="submit" class="button" value="提交" />

@@ -12,4 +12,8 @@
 	 -->
   		<package name="cn.edu.nku.cc.FakeDouban.domain.po"/>
 	</typeAliases>
+	<plugins>
+         <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+     </plugins>
+	
 </configuration>
