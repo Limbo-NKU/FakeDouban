@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.edu.nku.cc.FakeDouban.biz.LoginBiz;
 import cn.edu.nku.cc.FakeDouban.biz.UserBiz;
 import cn.edu.nku.cc.FakeDouban.domain.po.User;
+import cn.edu.nku.cc.FakeDouban.util.MD5Util;
 
 @Controller
 @RequestMapping("")
@@ -24,11 +25,12 @@ public class LoginController{
     public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
         String userName=request.getParameter("username");
         String password=request.getParameter("password");
+        password=MD5Util.md5(userName+password);
         User user=userBiz.findByNameAndPwd(userName,password);
         if(user!=null){
             HttpSession session=request.getSession();
             session.setAttribute("userSession", user);
-            return new ModelAndView("main");
+            return new ModelAndView("index");
         }else{
             return new ModelAndView("login", "error", "用户名或密码错误，请检查后重试");
         }
@@ -38,6 +40,6 @@ public class LoginController{
     public String logout(HttpServletRequest request,HttpServletResponse response){
         HttpSession session=request.getSession();
         session.invalidate();
-        return "login";
+        return "index";
     }
 }

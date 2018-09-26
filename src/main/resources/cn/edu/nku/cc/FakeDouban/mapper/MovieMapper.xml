@@ -15,15 +15,15 @@
 
 		<id property="id" jdbcType="INTEGER" column="movieid" />
 
-		<result property="movieName" jdbcType="VARCHAR" column="movie.moviename"/>
-        <result property="movieType" jdbcType="VARCHAR" column="movie.movietype"/>
-        <result property="movieRegion" jdbcType="VARCHAR" column="movie.movieregion"/>
-        <result property="moviePrice" jdbcType="DECIMAL" column="movie.movieprice"/>
-        <result property="ranking" jdbcType="DECIMAL" column="movie.ranking"/>
-		<result property="rankCount" jdbcType="INTEGER" column="movie.rankcount"/>
-		<result property="updateYear" jdbcType="DATE" column="movie.updateyear"/>
-		<result property="reason" jdbcType="VARCHAR" column="recommendmovie.reason"/>
-		<result property="recommendType" jdbcType="INTEGER" column="recommendmovie.recommendtype"/>
+		<result property="movieName" jdbcType="VARCHAR" column="moviename"/>
+        <result property="movieType" jdbcType="VARCHAR" column="movietype"/>
+        <result property="movieRegion" jdbcType="VARCHAR" column="movieregion"/>
+        <result property="moviePrice" jdbcType="DECIMAL" column="movieprice"/>
+        <result property="ranking" jdbcType="DECIMAL" column="ranking"/>
+		<result property="rankCount" jdbcType="INTEGER" column="rankcount"/>
+		<result property="updateYear" jdbcType="DATE" column="updateyear"/>
+		<result property="reason" jdbcType="VARCHAR" column="reason"/>
+		<result property="recommendType" jdbcType="INTEGER" column="recommendtype"/>
 		<collection property="movieTags" column="movieid" ofType="String" select="getTagsByMovieId"/>
 
 	</resultMap>
@@ -42,16 +42,16 @@
 	</resultMap>
 	<select id="findHotMovies" resultMap="MovieRecResultMap">
 		select * from movie
-			inner join rec_movie
-			on movie.movieid=rec_movie.id
-			where rec_movie.rec_type = 1
+			inner join recommendmovie
+			on movie.movieid=recommendmovie.movieid
+			where recommendmovie.recommendtype = 1
 			<!-- 1代表热门电影-->
 	</select>
 	<select id="findNewMovies" resultMap="MovieRecResultMap">
 		select * from movie 
-			inner join rec_movie
-			on movie.id=rec_movie.id
-			where rec_movie.rec_type = 2
+			inner join recommendmovie
+			on movie.movieid=recommendmovie.movieid
+			where recommendmovie.recommendtype = 2
 			<!--2代表新上映电影-->
 	</select>
 	<select id="findAll" resultMap="MovieResultMap">
@@ -63,4 +63,38 @@
 	<select id="findByName" parameterType="String" resultMap="MovieResultMap">
 		select * from movie where moviename like #{movieName}
 	</select>
+	<select id="findByAbsoluteName" parameterType="String" resultMap="MovieResultMap">
+		select * from movie where moviename like #{movieName}
+	</select>
+	<select id="findRecById" parameterType="int" resultMap="MovieRecResultMap">
+		select * from movie
+			inner join recommendmovie
+			on movie.movieid=recommendmovie.movieid
+			where movie.movieid=#{id}
+	</select>
+	
+	<insert id="insertmovie" parameterType="movie"  useGeneratedKeys="true" keyProperty="movieid">
+		insert into 
+			movie(moviename,movietype,movieregion,movieprice,ranking,rankcount,updatedate)
+			values(#{movieName},#{movieType},#{movieRegion},#{moviePrice},#{ranking},#{rankCount},#{updateDate})
+	</insert>
+	
+	<insert id="insertrecmovie" parameterType="movie">
+		insert into recommendmovie values(#{id},#{reason},#{recommendType})
+	</insert>
+	
+	<delete id="deleterecmovie" parameterType="int">
+		delete from recommendmovie where movieid=#{id}
+	</delete>
+	
+	<insert id="insertmovietag" parameterType="movietag">
+		insert into movieandtags(movieid,tagid) values(#{movieid},#{tagid})
+	</insert>
+	<update id="modifyMovie" parameterType="movie" >
+		update movie set moviename=#{movieName},movieType=#{movieType},
+			movieregion=#{movieRegion},movieprice=#{moviePrice},ranking=#{ranking},
+			rankcount=#{rankCount},updatedate=#{updateDate}
+			where movieid=#{id}
+	</update>
+	
 </mapper>

@@ -3,7 +3,7 @@
 	color: white;
 	text-align: center;
 	height: 70px;
-	width:95%;
+	width:90%;
 	font-size: xx-large;
 	font-weight:900;
 	margin-left: auto;
@@ -19,4 +19,8 @@
 }
 .login-list>li{
 	border-color: gray;
+}
+.user-control:last-child{
+	margin-right: 10px;
+	float: right;
 }

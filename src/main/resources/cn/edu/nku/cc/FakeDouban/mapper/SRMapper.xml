@@ -5,21 +5,40 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.nku.cc.FakeDouban.dao.SimpleReviewDao">
-	
-    <resultMap id="LRResultMap" type="simpleReview">
-        <id property="id" jdbcType="INTEGER" column="lrid"/>
+	<resultMap id="UserResultMap" type="user">
+
+		<id property="id" jdbcType="INTEGER" column="userid"/>
+
+		<result property="userName" jdbcType="VARCHAR" column="username" />
+		<result property="password" jdbcType="VARCHAR" column="password" />
+		<result property="gender" jdbcType="VARCHAR" column="gender" />
+		<result property="age" jdbcType="INTEGER" column="age" />
+		<result property="city" jdbcType="VARCHAR" column="city" />
+		<!-- <result property="job" jdbcType="VARCHAR" column="job.jobname" /> -->
+        <result property="description" jdbcType="LONGVARCHAR" column="description"  />
+        <result property="level" jdbcType="INTEGER" column="level"/>
+		<result property="job" jdbcType="VARCHAR" column="job"/>
+	</resultMap>
+	<select id="getUserByUserId" parameterType="int" resultMap="UserResultMap">
+		select * 
+            from `user`
+            left join reviewer
+            on reviewer.userid=`user`.userid
+            where `user`.userid=#{id}	
+    </select>
+    <resultMap id="SRResultMap" type="simpleReview">
+        <id property="id" jdbcType="INTEGER" column="srid"/>
         <result property="rank" jdbcType="INTEGER" column="rank"/>
         <result property="review" jdbcType="VARCHAR" column="review"/>
         <result property="likeCount" jdbcType="INTEGER" column="likecount"/>
-        <association property="user" javaType="user">
-            <id property="id" jdbcType="INTEGER" column="userid"/>
-        </association>
+        <association property="user" javaType="user" column="userid" select="getUserByUserId"/>
+            
         <association property="movie" javaType="movie">
             <id property="id" jdbcType="INTEGER" column="movieid"/>
         </association>
     </resultMap>
 
-    <select id="findSRByMovieId" parameterType="int" resultType="simpleReview">
+    <select id="findSRByMovieId" parameterType="int" resultMap="SRResultMap">
         select * from SimpleReview
             where movieid=#{movieId}
     </select>
@@ -28,10 +47,34 @@
             where userid=#{user.id}
                 and movieid = #{movie.id}
     </select>
-    <insert id="insert" parameterType="simpleReview" useGeneratedKeys="true" keyProperty="lrid">
+    <insert id="insert" parameterType="simpleReview" useGeneratedKeys="true" keyProperty="srid">
         insert into simpleReview(userid,movieid,rank,review,likecount)
         values(
-        #{user.id},#{movie.id}，#{rank},#{review},0
+        #{user.id},#{movie.id},#{rank},#{review},0
         )
     </insert>
+    
+    <select id="findAllSimpleReview" resultMap="SRResultMap">
+    	select *from simplereview
+    </select>
+    
+    <select id="findByUserid" parameterType="int" resultMap="SRResultMap">
+        select * from SimpleReview
+            where userid=#{id}
+    </select>
+    <select id="findSRNum" parameterType="int" resultType="int">
+    	select count(*) from simplereview 
+    		where movieid=#{movieid}
+    </select>
+   
+   <select id="findAvgSRRanking" parameterType="int" resultType="BigDecimal">
+  		select avg(rank) from simplereview 
+  			where movieid=#{movieid}
+   </select>
+    
+    
+    <delete id="deletesimplereview" parameterType="int">
+    	delete from simplereview where id=#{id}
+    </delete>
+   
 </mapper>

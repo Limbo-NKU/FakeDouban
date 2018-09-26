@@ -19,27 +19,31 @@
 			}
 		</script>
 		<!-- //for-mobile-apps -->
-		<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/contactstyle.css" type="text/css" media="all" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/faqstyle.css" type="text/css" media="all" />
-		<link href="${pageContext.request.contextPath}/css/single.css" rel='stylesheet' type='text/css' />
-		<link href="${pageContext.request.contextPath}/css/medile.css" rel='stylesheet' type='text/css' />
+		<link href="/FakeDouban/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/FakeDouban/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" href="/FakeDouban/css/contactstyle.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="/FakeDouban/css/faqstyle.css" type="text/css" media="all" />
+		<link href="/FakeDouban/css/single.css" rel='stylesheet' type='text/css' />
+		<link href="/FakeDouban/css/medile.css" rel='stylesheet' type='text/css' />
 		<!-- banner-slider -->
-		<link href="${pageContext.request.contextPath}/css/jquery.slidey.min.css" rel="stylesheet">
+		<link href="/FakeDouban/css/jquery.slidey.min.css" rel="stylesheet">
 		<!-- //banner-slider -->
 		<!-- pop-up -->
-		<link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/FakeDouban/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 		<!-- //pop-up -->
 		<!-- font-awesome icons -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="/FakeDouban/css/font-awesome.min.css" />
 		<!-- //font-awesome icons -->
 		<!-- js -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
+		<!-- 		<script type="text/javascript" src="/FakeDouban/js/jquery-2.1.4.min.js"></script>
+		
+		 -->
+		<script type="text/javascript" src="/FakeDouban/js/jquery-3.3.1.js"></script>
+		
 		<!-- //js -->
 		<!-- banner-bottom-plugin -->
-		<link href="${pageContext.request.contextPath}/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
-		<script src="${pageContext.request.contextPath}/js/owl.carousel.js"></script>
+		<link href="/FakeDouban/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+		<script src="/FakeDouban/js/owl.carousel.js"></script>
 		<script>
 			$(document).ready(function() {
 				$(".owl-demo").owlCarousel({
@@ -57,8 +61,8 @@
 		<!-- //banner-bottom-plugin -->
 		<!---<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>--->
 		<!-- start-smoth-scrolling -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/move-top.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/easing.js"></script>
+		<script type="text/javascript" src="/FakeDouban/js/move-top.js"></script>
+		<script type="text/javascript" src="/FakeDouban/js/easing.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event) {
@@ -70,25 +74,35 @@
 			});
 		</script>
 		<!-- start-smoth-scrolling -->
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/site.css"/>
+		<link rel="stylesheet" type="text/css" href="/FakeDouban/css/site.css"/>
 	</head>
 
 	<body>
 		<!-- header -->
+		<%
+			String info=(String)request.getAttribute("status");
+			if(info!=null){
+				%>
+				<script type="text/javascript">
+					alert("<%=info%>");
+				</script>
+				<%
+			}
+		%>
 		<div class="header">
 			<div class="container">
 				<div class="w3layouts_logo">
-					<a href="index.html">
-						<h1>One<span>Movies</span></h1></a>
+					<a href="/FakeDouban/movie/index">
+						<h1>Fake<span>Douban</span></h1></a>
 				</div>
 				<div class="w3_search">
-					<form action="${pageContext.request.contextPath}/movie/findMovies.do" method="post">
-						<input type="text" name="movieName" placeholder="搜索电影" required="">
+					<form action="/FakeDouban/movie/findmovies" method="post">
+						<input type="text" name="moviename" placeholder="搜索电影......" required="">
 						<input type="submit" value="搜索">
 					</form>
 				</div>
 				<div class="w3l_sign_in_register">
-					<ul>
+					<ul class="user-control">
 						<!--æ ¹æ®sessionæ¾ç¤ºç»å½æé®æèç¨æ·å-->
 						<!--<li>
 							<a href="#" data-toggle="modal" data-target="#myModal">Login</a>
@@ -97,22 +111,22 @@
 							if(session.getAttribute("userSession")==null){
 								%>
 								<li>
-									<a href="${pageContext.request.contextPath}/jsp/login.jsp" data-toggle="modal" data-target="#myModal">登录</a>
+									<a href="/FakeDouban/jsp/login.jsp" >登录</a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/jsp/register.jsp" data-toggle="modal" data-target="#myModal">注册</a>
+									<a href="/FakeDouban/jsp/register.jsp" >注册</a>
 								</li>
 								<%
 							}else{
 								%>
 								<li>
-									欢迎，<strong>${userSession.userName}</strong>
+									欢迎,<strong>${userSession.userName}</strong>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/jsp/usermodify.jsp" data-toggle="modal" data-target="#myModal">修改信息</a>
+									<a href="#" >修改信息</a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/logout.do" data-toggle="modal" data-target="#myModal">登出</a>
+									<a href="/FakeDouban/logout" >登出</a>
 								</li>
 								<%
 							}

@@ -5,34 +5,65 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.nku.cc.FakeDouban.dao.LongReviewDao">
-	
+	<resultMap id="UserResultMap" type="user">
+
+		<id property="id" jdbcType="INTEGER" column="userid"/>
+
+		<result property="userName" jdbcType="VARCHAR" column="username" />
+		<result property="password" jdbcType="VARCHAR" column="password" />
+		<result property="gender" jdbcType="VARCHAR" column="gender" />
+		<result property="age" jdbcType="INTEGER" column="age" />
+		<result property="city" jdbcType="VARCHAR" column="city" />
+		<!-- <result property="job" jdbcType="VARCHAR" column="job.jobname" /> -->
+        <result property="description" jdbcType="LONGVARCHAR" column="description"  />
+        <result property="level" jdbcType="INTEGER" column="level"/>
+		<result property="job" jdbcType="VARCHAR" column="job"/>
+	</resultMap>
+	<select id="getUserByUserId" parameterType="int" resultMap="UserResultMap">
+		select * 
+            from `user`
+            left join reviewer
+            on reviewer.userid=`user`.userid
+            where `user`.userid=#{id}	
+    </select>
     <resultMap id="LRResultMap" type="longReview">
         <id property="id" jdbcType="INTEGER" column="lrid"/>
         <result property="rank" jdbcType="INTEGER" column="rank"/>
         <result property="title" jdbcType="VARCHAR" column="title"/>
         <result property="content" jdbcType="VARCHAR" column="content"/>
         <result property="likeCount" jdbcType="INTEGER" column="likecount"/>
-        <association property="reviewer" javaType="user">
-            <id property="id" jdbcType="INTEGER" column="userid"/>
-        </association>
+        <association property="reviewer" javaType="user" column="userid" select="getUserByUserId"/>
+            
         <association property="movie" javaType="movie">
             <id property="id" jdbcType="INTEGER" column="movieid"/>
         </association>
     </resultMap>
 
-    <select id="findLRByMovieId" parameterType="int" resultType="longReview">
+    <select id="findLRByMovieId" parameterType="int" resultMap="LRResultMap">
         select * from LongReview
             where movieid=#{movieId}
     </select>
-    <select id="findByReviewerAndMovie" parameterType="longReview" resultType="longReview">
+    <select id="findByReviewerAndMovie" parameterType="longReview" resultMap="LRResultMap">
         select * from LongReview
-            where reviewerid=#{reviewer.id}
+            where userid=#{reviewer.id}
                 and movieid = #{movie.id}
     </select>
     <insert id="insert" parameterType="longReview" useGeneratedKeys="true" keyProperty="lrid">
         insert into longReview(userid,movieid,rank,title,content,likecount)
         values(
-        #{reviewer.id},#{movie.id}，#{rank},#{title},#{content},0
+        #{reviewer.id},#{movie.id},#{rank},#{title},#{content},0
         )
     </insert>
+    <select id="findAllLongReview" resultMap="LRResultMap">
+    	select *from longreview
+    </select>
+    
+    <select id="findByReviewer" parameterType="int" resultMap="LRResultMap">
+        select * from LongReview
+            where reviewerid=#{id}
+    </select>
+   
+    <delete id="deletelongreview" parameterType="int">
+    	delete from longreview where lrid=#{id}
+    </delete>
 </mapper>

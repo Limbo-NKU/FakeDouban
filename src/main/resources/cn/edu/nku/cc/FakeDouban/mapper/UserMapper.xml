@@ -20,6 +20,27 @@
 		<result property="job" jdbcType="VARCHAR" column="job"/>
 	</resultMap>
 	
+
+	<resultMap id="AdministerResultMap" type="administer">
+
+		<id property="id" jdbcType="INTEGER" column="adminid"/>
+
+		<result property="adminName" jdbcType="VARCHAR" column="adminname" />
+		<result property="password" jdbcType="VARCHAR" column="adminpassword" />
+        <result property="level" jdbcType="INTEGER" column="adminlevel"/>
+		
+	</resultMap>
+	
+	<select id="findAll" resultMap="UserResultMap">
+		select * from user
+            left join reviewer
+            on reviewer.userid=user.userid
+	</select>
+	
+    <select id="findByAdminNameAndPwd" parameterType="administer" resultMap="AdministerResultMap">
+		select * from administrator where adminname=#{adminName} and adminpassword=#{password}
+    </select>
+
 	<select id="findByNameAndPwd" parameterType="user" resultMap="UserResultMap">
         select * from user
             left join reviewer
@@ -28,20 +49,7 @@
             and user.password=#{password}
     </select>
     <select id="findById" parameterType="int" resultMap="UserResultMap">
-        <!-- SELECT
-			`user`.userid as `id`,
-			`user`.username as userName,
-			`user`.`password` as `password`,
-			`user`.age as age,
-			`user`.city as city,
-			`user`.gender as gender,
-			`user`.job as job,
-			`user`.description as description,
-			reviewer.`level` as `level`
-		from `user`
-            left join reviewer
-            on reviewer.userid=`user`.userid
-            where `user`.userid=#{id} -->
+        
         select * 
             from `user`
             left join reviewer
@@ -73,4 +81,21 @@
                 job=#{job}
             where userid=#{id}
     </update>
+    
+    <insert id="insert" parameterType="user"
+    useGeneratedKeys="true" keyProperty="userid">
+        insert into user (username,password,gender,age,city,description,job)
+            values (
+            #{userName},#{password},#{gender},#{age},#{city},#{description},#{job}
+            )
+    </insert>
+    
+    <insert id="levelupUser" parameterType="int">
+    	insert into reviewer values(#{id},1);
+    </insert>
+     
+    <delete id="deleteUser" parameterType="int">
+    	delete from user where userid=#{id}
+    </delete>
+    
 </mapper>

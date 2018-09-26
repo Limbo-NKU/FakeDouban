@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <script type="text/javascript" src="/FakeDouban/js/move-top.js"></script>
 <footer>
 		<div class="footer">
 			<div class="container">
@@ -9,14 +10,14 @@
 							<h2>联系我们</h2>
 							<div class="w3ls_footer_grid_left1_pos">
 								<h4 style="color: white">
-									不好意思，我也不知道如何联系我们......
+									联系方式？不存在的。
 								</h4>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6 w3ls_footer_grid_right">
 						<a href="index.html">
-							<h2>One<span>Movies</span></h2></a>
+							<h2>Fake<span>Douban</span></h2></a>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
@@ -28,33 +29,16 @@
 				<div class="col-md-7 w3ls_footer_grid1_right">
 					<ul>
 						<li>
-							<a href="genres.html">Movies</a>
+							<a href="/FakeDouban/admin">后台管理界面入口</a>
 						</li>
-						<li>
-							<a href="faq.html">FAQ</a>
-						</li>
-						<li>
-							<a href="horror.html">Action</a>
-						</li>
-						<li>
-							<a href="genres.html">Adventure</a>
-						</li>
-						<li>
-							<a href="comedy.html">Comedy</a>
-						</li>
-						<li>
-							<a href="icons.html">Icons</a>
-						</li>
-						<li>
-							<a href="contact.html">Contact Us</a>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
 	</footer>
- 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+ 	<script src="/FakeDouban/js/bootstrap.min.js"></script>
 		<script>
 			$(document).ready(function() {
 				$(".dropdown").hover(
@@ -71,7 +55,7 @@
 		</script>
 		<!-- //Bootstrap Core JavaScript -->
 		<!-- here stars scrolling icon -->
-		<script type="text/javascript">
+		<!--  --><script type="text/javascript">
 			$(document).ready(function() {
 				/*
 					var defaults = {

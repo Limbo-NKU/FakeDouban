@@ -1,0 +1,17 @@
+[
+    {
+        "userType":1,
+        "userCollection":1,
+        "movieType":1,
+        "movieCollection":1,
+        "count":100
+    },
+    {
+        "userType":1,
+        "userCollection":2,
+        "movieType":1,
+        "movieCollection":1,
+        "count":200
+    }
+]
+    
